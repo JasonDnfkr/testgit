@@ -299,11 +299,27 @@ TSS 是一个结构体，里面保存了若干寄存器。在任务切换时，C
 
 ### 4.2 中断
 
-触发中断时，CPU会访问IDT表，根据中断向量号找到中断描述符后，将当前的CPL和目标段描述符的DPL进行对比。如果数值上CPL > DPL，则说明要往高特权级转移，也意味着需要用内核栈。CPU会在TSS里取内核栈地址esp0，在内核栈保存当前的ss、esp3，然后保存eflags，cs，eip。
+触发中断时，CPU会访问IDT表，根据中断向量号找到中断描述符后，将当前的CPL和目标段描述符的DPL进行对比。
 
-通过中断门访问中断服务程序时，CPU会对EFLAGS的IF位清 0，即不允许其他中断打扰当前中断的执行，也就是中断的执行过程中关中断，在通过iret指令从中断返回时恢复IF位。而这里的恢复是指弹出栈中保存的eflags值到EFLAGS寄存器。
+如果数值上CPL > DPL，则说明要往高特权级转移，也意味着需要用内核栈。CPU会在TSS里取内核栈地址esp0，在内核栈保存当前的ss、esp3，然后保存eflags，cs，eip。
 
-最后使用iret从中断中返回，会先读取eflags，cs，eip。如果特权级需要切换（读取的cs和当前的cs权限位不一致），还会读取先前保存的ss，esp3，切换回用户栈。
+通过中断门访问中断服务程序时，CPU 会对 EFLAGS 的 IF 位清 0，即不允许其他中断打扰当前中断的执行，也就是中断的执行过程中关中断，再通过 iret 指令从中断返回时恢复 IF 位。而这里的恢复是指弹出栈中保存的 eflags 值到 EFLAGS 寄存器。
+
+最后使用 iret 从中断中返回，会先读取 eflags，cs，eip。如果特权级需要切换（读取的cs和当前的cs权限位不一致），还会读取先前保存的ss，esp3，切换回用户栈。
+
+摘抄：
+
+> ***1.*** 如果发生了特权级转移，压入之前的堆栈段寄存器 SS 及栈顶指针 ESP 保存到栈中，并将堆栈切换为 TSS 中的堆栈。
+>
+> ***2.*** 压入标志寄存器 EFLAGS。
+>
+> ***3.*** 压入之前的代码段寄存器 CS 和指令寄存器 EIP，相当于压入返回地址。
+>
+> ***4.*** 如果此中断有错误码的，压入错误码 ERROR_CODE
+>
+> ***5.*** 结束（之后就跳转到中断程序了）
+
+![图片](https://mmbiz.qpic.cn/mmbiz_png/GLeh42uInXRaebHKiaWevE73umedjHIDmah4woagFJsXMlXibia5XF5NdhblfaCFmlHbFlrVYUyMVDxVk7Ct88XSg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 
 
