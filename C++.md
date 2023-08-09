@@ -383,8 +383,179 @@ shared_ptr的引用计数本身是安全且无锁的，但对象的读写则不�
 
 弱引用智能指针 weak_ptr 可以看做是 shared_ptr 的助手，它不管理 shared_ptr 内部的指针。weak_ptr 没有重载操作符 * 和 ->，因为它不共享指针，不能操作资源，所以它的构造不会增加引用计数，析构也不会减少引用计数，它的主要作用就是作为一个旁观者监视 shared_ptr 中管理的资源是否存在。
 
+通过调用 weak_ptr 类提供的 lock() 方法来获取管理所监测资源的 shared_ptr 对象。相当于创建一个新的 shared_ptr。
 
-通过调用 weak_ptr 类提供的 lock() 方法来获取管理所监测资源的 shared_ptr 对象。相当于创建一个新的 shared_ptr
+
+
+##### shared_ptr 代码实现
+
+先实现对 raw 指针的封装（构造和析构），然后实现几个运算符重载 *、->、bool()、然后实现两种构造函数，两种=运算符重载（复制和移动）
+
+```c++
+#include <iostream>
+#include <cstdio>
+#include <memory>
+
+class Point {
+public:
+    int a;
+    int b;
+    int c;
+
+    Point(int _a, int _b, int _c) : a(_a), b(_b), c(_c) { }
+    Point();
+};
+
+
+class _ref_count {
+public:
+    int increase() {
+        return ++count;
+    }
+
+    int decrease() {
+        return --count;
+    }
+
+    int get_count() const {
+        return count;
+    }
+
+    _ref_count(int _count = 1) : count(_count) { }
+
+
+private:
+    int count;
+};
+
+
+template<typename T>
+class shared_pointer {
+public:
+    shared_pointer(T* ptr = nullptr) : m_ptr(ptr) {
+        if (m_ptr) {
+            m_ref_count = new _ref_count();
+        }
+    }
+
+    ~shared_pointer() {
+        if (m_ptr) {
+            m_ref_count->decrease();
+
+            if (m_ref_count->get_count() == 0) {
+                delete m_ptr;
+                delete m_ref_count;
+                m_ptr = nullptr;
+                m_ref_count = nullptr;
+            }
+        }
+    }
+
+    shared_pointer(const shared_pointer& rhs) {
+        if (rhs) {
+            m_ptr = rhs.m_ptr;
+            m_ref_count = rhs.m_ref_count;
+            m_ref_count->increase();
+        }
+    }
+
+    shared_pointer(shared_pointer&& rhs) {
+        if (rhs) {
+            m_ptr = rhs.m_ptr;
+            m_ref_count = rhs.m_ref_count;
+            rhs.m_ptr = nullptr;
+            rhs._ref_count = nullptr;
+        }
+    }
+
+    shared_pointer& operator=(const shared_pointer& rhs) {
+        if (m_ptr && m_ptr == rhs.m_ptr) {
+            return *this;
+        }
+        else if (m_ptr) {
+            m_ref_count->decrease();
+            if (m_ref_count->get_count() == 0) {
+                delete m_ptr;
+                delete m_ref_count;
+                m_ptr = nullptr;
+                m_ref_count = nullptr;
+            }
+
+            m_ptr = rhs.m_ptr;
+            m_ref_count = rhs.m_ref_count;
+        }
+
+        return *this;
+    }
+
+    shared_pointer& operator=(shared_pointer&& rhs) {
+        if (m_ptr && m_ptr == rhs.m_ptr) {
+            return *this;
+        }
+        else if (m_ptr) {
+            m_ref_count->decrease();
+            if (m_ref_count->get_count() == 0) {
+                delete m_ptr;
+                delete m_ref_count;
+                m_ptr = nullptr;
+                m_ref_count = nullptr;
+            }
+
+            m_ptr = rhs.m_ptr;
+            m_ref_count = rhs.m_ref_count;
+
+            rhs.m_ptr = nullptr;
+            rhs.m_ref_count = nullptr;
+        }
+
+        return *this;
+    }
+
+    T& operator*() const {
+        return *m_ptr;
+    }
+
+    T* operator->() const {
+        return m_ptr;
+    }
+
+    operator bool() const {
+        return m_ptr;
+    }
+
+    int get_count() const {
+        return m_ref_count->get_count();
+    }
+
+    void reset(T* ptr) {
+        if (m_ptr) {
+            m_ref_count->decrease();
+            if (m_ref_count->get_count() == 0) {
+                delete m_ptr;
+                delete m_ref_count;
+                m_ptr = nullptr;
+                m_ref_count = nullptr;
+            }
+        }
+
+        m_ptr = ptr;
+        m_ref_count = new _ref_count();
+    }
+
+
+
+private:
+    T* m_ptr;
+    _ref_count* m_ref_count;
+};
+
+int main() {
+
+    return 0;
+}
+```
+
+
 
 
 
