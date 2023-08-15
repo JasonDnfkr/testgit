@@ -4,15 +4,15 @@
 
 ### Self-intro
 
-Hello interviewer, thank you very much for giving me this valuable opportunity to interview with Lenovo. My name is Zhang Zhehao, and I am currently a 24th-year master student majoring in software engineering at the School of Software, Nanjing University. I am interested in applying for the position of backend developer. Next, I will briefly introduce myself.
+Hello interviewer, I sincerely appreciate this valuable interview opportunity provided by **Lenovo Group**. My name is Zehao Zhang, and I am currently a 24th-year master student majoring in software engineering at the School of Software, Nanjing University. I am interested in applying for the position of C++ programming developer. Next, I will briefly introduce myself.
 
 In terms of academic performance, I have achieved excellent grades during my academic career. During my undergraduate studies, I ranked first in my major in the school and passed the CET-6. In terms of awards, I received the National Scholarship in 2019-2020. 
 
-In terms of projects, I have mainly been involved in two project experiences:
+In terms of internships, during the summer holiday, I interned at Vivo Mobile Communications Co., Ltd., holding the position of Storage System Engineer. I was responsible for the development and maintenance of storage modules within the Linux kernel. During my tenure, I primarily resolved issues related to file system storage data inconsistency in practical projects and participated in contributions to the Linux open-source community.
 
-First, I designed and implemented a Linux operating system kernel based on x86-32. This project mainly used C language to implement a prototype of the Linux operating system kernel. Currently, it has implemented basic kernel functions such as hard disk loading, interrupt and exception handling, virtual memory management of multi-level page tables, process scheduling and concurrency, and privilege level isolation, and supports some system calls such as sleep, fork, exec, etc.
+This experience deepened my understanding of kernel fundamentals and enhanced my ability to read large-scale project source code and swiftly locate bugs.
 
-Second, I implemented a TCP/IP network protocol stack. This project mainly implemented a simple network protocol stack based on the four-layer network model of TCP/IP, which can parse and send received data packets. Currently, it supports the parsing and sending of ARP, ICMP, UDP, and TCP data packets.
+In terms of projects, a significant project experience I had was the design and implementation of a simulated x86 32-bit Linux-like operating system kernel. This project referenced the design of the Linux operating system, developed a kernel prototype, and has currently achieved fundamental kernel functionalities such as hard disk loading, interrupt and exception handling, virtual memory management with multi-level page tables, process scheduling and concurrency, privilege level isolation, and some system calls like sleep, fork, and exec.
 
 In addition, during my undergraduate studies, I served as the class monitor and the president of the School of Computer Association, which also helped me develop my personal organizational coordination and communication skills.
 
@@ -82,6 +82,12 @@ Nanjing University is a super cool university located in Nanjing, China. It's go
 
 ### 规划
 
-First of all, I hope to further my learning and make achievements in my current field. Secondly, I hope to use this internship as an opportunity to become a full-time employee in the company during the autumn recruitment. I will fulfill my responsibilities according to the company's management and arrangement.
+First of all, I hope to further my learning and make achievements in my current field. I will fulfill my responsibilities according to the company's management and arrangement. 
 
 喜欢的歌手 喜欢的运动 理想的工作和公司 离开家乡最想念什么 最激励鼓舞你的老师
+
+
+
+困难
+
+I'm sure that the current situation is quite challenging. Over the past two years, the job market hasn't been favorable, and during this period, I have to juggle internship tasks, campus recruitment, and my graduation thesis. I'm dealing with multiple tasks simultaneously, which puts a significant test on my capabilities.

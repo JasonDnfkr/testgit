@@ -92,7 +92,7 @@ struct inode
     struct timespec i_mtime;
     struct timespec i_ctime;
     
-    /* 用于定位磁盘块位置的信息 */
+    /* （好像不是）用于定位磁盘块位置的信息 */
     unsigned short i_bytes;
     unsigned int i_blkbits;
     blkcnt_t i_blocks;
