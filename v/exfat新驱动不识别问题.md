@@ -10,7 +10,7 @@ PD2183、PD2171等项目，无法识别exfat格式U盘里的文件
 
 exfat也叫fat64，是微软专门为可移动设备设计的。
 
-![img](.\exfat新驱动不识别问题.assets\clip_image002.png)
+![img](E:\Data\Work\Job\vivo\秋招复习\exfat新驱动不识别问题.assets\clip_image002.png)
 
 https://docs.microsoft.com/en-us/windows/win32/fileio/exfat-specification#77-file-name-directory-entry
 
@@ -58,7 +58,7 @@ PD2183项目机器无法识别U盘内容，将U盘格式化后，可以正常使
 
  
 
-![image-20230708212301448](.\exfat新驱动不识别问题.assets\image-20230708212301448.png)
+![image-20230708212301448](E:\Data\Work\Job\vivo\秋招复习\exfat新驱动不识别问题.assets\image-20230708212301448.png)
 
 在去掉fsck工具后，通过命令行手动挂载U盘，在老驱动上以不同namecase挂载参数创建文件后，插入新驱动机器。经试验发现：
 
@@ -76,9 +76,9 @@ PD2183项目机器无法识别U盘内容，将U盘格式化后，可以正常使
 
 **1. 使用[winhex](https://baike.baidu.com/item/winhex/4558863?fr=aladdin)工具，对比新老驱动生成同名文件metadata差异，或者对比使用老驱动生成的文件在老工具修复前后的差异。**
 
-![image-20230708212419522](.\exfat新驱动不识别问题.assets\image-20230708212419522.png)
+![image-20230708212419522](E:\Data\Work\Job\vivo\秋招复习\exfat新驱动不识别问题.assets\image-20230708212419522.png)
 
-![image-20230708212439535](.\exfat新驱动不识别问题.assets\image-20230708212439535.png)
+![image-20230708212439535](E:\Data\Work\Job\vivo\秋招复习\exfat新驱动不识别问题.assets\image-20230708212439535.png)
 
 左边为老驱动上使用namecase=1参数挂载后创建的文件，该文件在新驱动上无法正常识别。右边为老工具以-fR参数（正常为-cfR）修复后的文件。
 
@@ -86,7 +86,7 @@ PD2183项目机器无法识别U盘内容，将U盘格式化后，可以正常使
 
 **2. 通过调试kernel代码，定位到导致不识别问题的具体位置。**
 
-![image-20230708215029050](.\exfat新驱动不识别问题.assets\image-20230708215029050.png)
+![image-20230708215029050](E:\Data\Work\Job\vivo\秋招复习\exfat新驱动不识别问题.assets\image-20230708215029050.png)
 
 新驱动无法识别U盘文件，可以看到父目录下的子文件名称，但是文件的属性（修改时间、inode号、ugo权限等）无法正常查看，访问具体某个文件时返回ENOENT (No such file or directory)。
 
