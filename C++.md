@@ -399,7 +399,6 @@ shared_ptr的引用计数本身是安全且无锁的，但对象的读写则不�
 先实现对 raw 指针的封装（构造和析构），然后实现几个运算符重载 *、->、bool()、然后实现两种构造函数，两种=运算符重载（复制和移动）
 
 ````c++
-```cpp
 #include <iostream>
 #include <cstdio>
 #include <memory>
