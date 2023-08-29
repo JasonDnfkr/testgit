@@ -1,3 +1,7 @@
+[TOC]
+
+
+
 ## 1 数据结构
 
 ### 1.1 文件系统 VFS 层相关数据结构
@@ -198,7 +202,7 @@ struct inode_operations
 
   - `struct kiocb` 封装了 `struct file *`，用于控制内核的读写流程（当前I/O的状态）。内核的每一次读写都会对应一个 `kiocb`。
 
-  - `struct iov_iter` 是一个迭代器结构，封装了 buf 和 len。**这个迭代器用于记录所有需要读取的片段信息，因为内核有系统调用支持读写多个非连续缓冲区。**
+  - `struct iov_iter` 是一个迭代器结构，封装了 buf 和 len。**这个迭代器用于记录所有需要读取的片段信息，因为内核有系统调用 （readv、writev） 支持读写多个非连续缓冲区。**
 
   - 这两个封装的结构，简单来说，用于内核态到用户态的数据拷贝。
 
@@ -238,7 +242,7 @@ struct inode_operations
 - **块设备**每次读取都必须以 `sector` 扇区（物理上叫扇区，内核视角通常描述为块） 512B 为单位，因此可以计算出读取该文件，涉及到哪些 sector，和这些 sector 的位置。在内核中，与磁盘上的 sector 对应的数据结构是 `buffer_head`。 
   - 关键函数：`get_block` 会创建一些 `buffer_head` 结构体，通过文件的 inode 号，查找到文件具体所在的 `sector`，建立映射。
   - `buffer_head` 结构中有一个重要的成员 `b_data`，是一个指针，指向了文件的 offset 在 bh 缓存中的偏移。这个指针最终确定了读取文件的位置。
-- **内核**每次读取都必须以 page 为单位，也就是 4KB。因此，一个页包括很多个 sector，因此对于 page cache 而言，每个 4KB 的 page 都会对应到磁盘上 4KB 的块上面，内核需要以页为单位，读取出文件涉及到的每一个 sector。因此，page 与 buffer_head 在数据结构上也相关联。buffer_head 定位的缓存，在 page cache 里构成了连续的内存空间。
+- **内核**每次读取都必须以 page 为单位，也就是 4KB。因此，一个页包括很多个 sector，因此对于 page cache 而言，每个 4KB 的 page 都会保存一系列连续的 buffer_head（或者说对应的 sector），内核需要以页为单位，读取出文件涉及到的每一个 sector。因此，page 与 buffer_head 在数据结构上也相关联。buffer_head 定位的缓存，在 page cache 里构成了连续的内存空间。
 - `bio` 数据结构描述硬盘里面的位置与 page cache 的页的对应关系。bio 结构中，有一个 `bio_vec` 迭代器，指向一张表，描述一次请求中对应的 page。
 - bio 将多个的页面作为一次请求提交。在内核从磁盘读取数据映射到 page cache 的过程中，会尝试做以下内容：
   - 如果磁盘上物理块连续，则只需要提交一个 bio 结构即可；
@@ -275,7 +279,23 @@ struct inode_operations
 
 
 
-## 4 总结
+## 4 open 流程
+
+![image-20230830005521171](VFS读写全流程.assets/image-20230830005521171.png)
+
+| **function**          | **功能**                                                     |
+| --------------------- | ------------------------------------------------------------ |
+| get_unused_fd_flags() | 获取一个新的可用的文件描述符                                 |
+| do_flip_open()        | 解析给定的文件路径名，关联至file结构体中；创建nameidata对象，用于路径遍历时保存其状态。(在路径查找的过程中，可能会跨越多个文件系统，因此在查找过程中，需要更新struct nameidate类型的变量中的root参数) |
+| path_openat()         | 为 struct  file 申请内存空间，设置遍历路径的初始状态         |
+| link_path_walk()      | 解析文件路径名，用于将目录名转换为一个目录项dentry           |
+| walk_component()      | 对当前的路径进行搜索操作                                     |
+| open_last_lookups()   | 分析最后的路径分量，如果为空则会创建                         |
+| lookup_open()         | 1. 从dentry的dhash中查找文件，若查找成功，则更新path变量，返回  2. 若从dentry的dhash中没有查找到文件，则调用dentry的lookup接口，查找dentry的子dentry是否存在符合条件的子dentry若查找成功，更新path变量，返回成功;  3. 若查找失败，则调用vfs_create接口创建文件，更新path变量，返回 |
+
+
+
+## 5 总结
 
 1. IO 栈：**VFS - 文件系统 - 块层 - SCSI 驱动层**；
 2. VFS 负责通用的文件抽象语义，管理并切换文件系统；
