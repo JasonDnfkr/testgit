@@ -295,7 +295,39 @@ struct inode_operations
 
 
 
-## 5 总结
+## 5 mount 流程
+
+- 在用户空间由 `mount` 系统调用接口来挂载文件系统，该函数的函数原型	
+
+```c
+int mount(const char *dev_name, const char *dir_name, const char *fstype, unsigned long flags, const void *data);
+```
+
+​	需要指定设备名，目录路径，文件系统名等。
+
+- 首先要走用户态系统调用接口，将这些字符串参数拷贝至内核空间中。
+
+- 然后会根据路径解析出 struct path 结构、struct dentry 结构。
+
+  > `struct path` 结构表示文件的路径，通常是从字符串路径解析之后，在内存中的结构。
+  >
+  > `struct dentry` 是目录项缓存，用于将缓存的路径和 inode 结合，**以便能够通过目录路径字符串快速找到 inode。**
+  >
+  > 在路径查找的过程中，每查询到一个目录，就会建立一次 dentry 到 inode 的缓存。以树形结构存在，关联父子 dentry 结构。
+
+- 根据文件系统字符串参数，查找在内核中的文件系统对象链表里，注册的文件系统对象，主要查找的是 `struct file_system_type` 这个结构体。
+
+  `struct file_system_type` 描述一个文件系统类，与之对应的是一个文件系统驱动模块，其中主要信息包括该文件系统名称，最重要的是包含文件系统自身的 mount 函数的实现，该函数中会对文件系统的 superblock 进行初始化。
+
+  文件系统驱动模块加载时对该结构初始化，并调用 register_filesystem() 将其加入全局文件系统类链中。
+
+- 然后会对挂载的参数进行解析，随后，调用一个叫 `get_tree` 的接口函数，用于去读取文件系统的超级块信息并创建一个超级块对象，然后执行具体的挂载方法。
+
+- 然后会执行 `do_new_mount_fc`，关联挂载点和超级块，以便于用户可通过路径来访问所挂载的文件系统。
+
+
+
+## 6 总结
 
 1. IO 栈：**VFS - 文件系统 - 块层 - SCSI 驱动层**；
 2. VFS 负责通用的文件抽象语义，管理并切换文件系统；
