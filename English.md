@@ -4,7 +4,7 @@
 
 ### Self-intro
 
-Hello interviewer, I sincerely appreciate this valuable interview opportunity provided by **Lenovo Group**. My name is Zehao Zhang, and I am currently a 24th-year master student majoring in software engineering at the School of Software, Nanjing University. I am interested in applying for the position of C++ programming developer. Next, I will briefly introduce myself.
+Hello interviewer, I sincerely appreciate this valuable interview opportunity provided by **Bosch**. My name is Zehao Zhang, and I am currently a 24th-year master student majoring in software engineering at the School of Software, Nanjing University. I am interested in applying for the position of Middleware Embedded Development. Next, I will briefly introduce myself.
 
 In terms of academic performance, I have achieved excellent grades during my academic career. During my undergraduate studies, I ranked first in my major in the school and passed the CET-6. In terms of awards, I received the National Scholarship in 2019-2020. 
 
@@ -64,7 +64,7 @@ Yeah. First It is true that it is important for us to know our strengths and wea
 
 I think my strength is I am  a optimistic person, that means I can face difficulty and always trying to find out solution. And I have the persistance to concentrate on something for a long time. 
 
-As for weakness, I think that I am not very confident about talking to the public, I often felt nervous. So I am trying to change this situation. I joined our college association in fresh year and try to make myself more confidence. 
+As for weakness,  is that I tend to have a bit too many concerns before taking action, which can lead to missing some opportunities. However, it also means that I tend to consider things more thoroughly. I believe I should be more decisive in my actions.
 
 
 
@@ -77,6 +77,12 @@ Nanjing University is a super cool university located in Nanjing, China. It's go
 ### 联想
 
 "I know that Lenovo was founded in China and has a global presence as a well-known large-scale company. Its main businesses include manufacturing intelligent devices, selling PCs, and providing cloud services. I chose Lenovo for two reasons: first, C++ development is a suitable job for me, and second, because I have been using Lenovo devices since childhood. My home's desktop computer, my current y9000p laptop, and my monitor are all Lenovo products. For me, I have a certain personal attachment to Lenovo. I also hope to work in Shenzhen because I have elderly relatives living there, and I can take this opportunity to visit them frequently."
+
+
+
+#### 博世
+
+Bosch Automotive is one of the world's leading automotive technology and component suppliers. The company is headquartered in Germany. Bosch Automotive focuses on providing advanced automotive technology solutions to car manufacturers. including engine control systems, transmission systems, vehicle electronics, safety technology, and driver assistance systems
 
 
 
