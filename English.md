@@ -4,19 +4,20 @@
 
 ### Self-intro
 
-Hello interviewer, I sincerely appreciate this valuable interview opportunity provided by **Bosch**. My name is Zehao Zhang, and I am currently a 24th-year master student majoring in software engineering at the School of Software, Nanjing University. I am interested in applying for the position of Middleware Embedded Development. Next, I will briefly introduce myself.
+Hello everyone, I'm glad I have the opportunity provided by **Lenovo**. My name is Zehao Zhang, and I am currently a master student majoring in software engineering at Nanjing University. I am interested in applying for the position of Cpp Software Engineer. Next, I will give a brief introduction about myself.
 
-In terms of academic performance, I have achieved excellent grades during my academic career. During my undergraduate studies, I ranked first in my major in the school and passed the CET-6. In terms of awards, I received the National Scholarship in 2019-2020. 
+In my academic performance, I have achieved excellent grades during my academic career. During my undergraduate studies, I ranked first in my major at the school. In terms of awards, I received the National Scholarship in 2020 (two thousand twenty). 
 
-In terms of internships, during the summer holiday, I interned at Vivo Mobile Communications Co., Ltd., holding the position of Storage System Engineer. I was responsible for the development and maintenance of storage modules within the Linux kernel. During my tenure, I primarily resolved issues related to file system storage data inconsistency in practical projects and participated in contributions to the Linux open-source community.
+In terms of internships, I interned at vivo Smartphone during the summer, working as a Storage System Engineer. I was responsible for the development and maintenance of storage modules within the Linux kernel. I primarily resolved issues related to file system, and data inconsistency. I also give some contributions to the Linux open-source community.
 
-This experience deepened my understanding of kernel fundamentals and enhanced my ability to read large-scale project source code and swiftly locate bugs.
+> This experience deepened my understanding of kernel fundamentals and enhanced my ability to read large-scale project source code and swiftly locate bugs.
+>
 
-In terms of projects, a significant project experience I had was the design and implementation of a simulated x86 32-bit Linux-like operating system kernel. This project referenced the design of the Linux operating system, developed a kernel prototype, and has currently achieved fundamental kernel functionalities such as hard disk loading, interrupt and exception handling, virtual memory management with multi-level page tables, process scheduling and concurrency, privilege level isolation, and some system calls like sleep, fork, and exec.
+In terms of project experience,  I implemented a thrity-two-bit Linux-like operating system kernel prototype, based on intel x-eighty-six CPU.  I mainly referenced the design of the Linux operating system. It has some fundamental kernel functionalities, such as hard disk loading, interrupt and exception handling, virtual memory management, process scheduling and concurrency, privilege level isolation, and some system calls like sleep, fork, exec and printf.
 
-In addition, during my undergraduate studies, I served as the class monitor and the president of the School of Computer Association, which also helped me develop my personal organizational coordination and communication skills.
+In addition, during my undergraduate studies, I served as the class monitor and the president of the School of Computer Association. These experiences greatly improved my communication skills and taught me the value of effective teamwork.
 
-That's my basic information. I hope to communicate and learn with you in this interview. Thank you!
+That's my basic information. Thank you for considering my application, and I'm excited to learn more during this interview. Thank you.
 
 
 
@@ -24,23 +25,25 @@ That's my basic information. I hope to communicate and learn with you in this in
 
 介绍一门专业课/学的最好的课程/最喜欢的课程
 
-My favorite course is Operating Systems, as you can see from my projects, which are related to it. Operating Systems allow me to delve into the underlying knowledge of computers and to study in detail the process of program execution, as well as explore the principles of programming languages and CPUs.
+My favorite course is Operating Systems, as you can see from my projects, which are related to it. Operating Systems allow me to gain a comprehensive understanding of the fundamental aspects of computers. I could study in detail about the process of program execution, explore the principles behind programming languages and CPU.
 
 
 
 ### 家乡
 
-My hometown Nanchang is the capital of Jiangxi Province in southeastern China. It is called “hero city” because **Nanchang Uprising took place in 1927 there.** There are lots of places of interest in Nanchang, including **Teng Wang Pavilion, Bayi Square, Bayi Memorial, Wanshou Palace** and so on. There are many different kinds of famous food in Nanchang, and I think the mixed powder and earthen pot soup are the most delicious. Generally speaking, Nanchang is a great city and welcome to Nanchang. 
+My hometown Nanchang is the capital of Jiangxi Province in southeastern China. It is called “hero city” because **Nanchang Uprising took place in 1927 there.** There are lots of places of interest in Nanchang, including **Teng Wang Pavilion, Bayi Square, Bayi Memorial, Wanshou Palace** and so on. There are many different kinds of famous food in Nanchang. Generally Nanchang is a great city and welcome to Nanchang. 
 
 
 
 ### 为什么想来XX城市
 
-I ve heard about xx city. It impressed me a lot. **One of my roommate comes from there and he often invites me to pay a visit to the city.** 
+Shanghai is one of the modest city in China. It impressed me a lot. 
+
+I think it is a global financial and technological center, it gives infinite opportunities to young people like me.
 
 The city is in the south, and I prefer studying and living in the south. 
 
-It is a great choice for me to continue my study life in xx city if it is possible.
+It is a great choice for me to continue my career in Shanghai city if it is possible.
 
 
 
@@ -64,19 +67,19 @@ Yeah. First It is true that it is important for us to know our strengths and wea
 
 I think my strength is I am  a optimistic person, that means I can face difficulty and always trying to find out solution. And I have the persistance to concentrate on something for a long time. 
 
-As for weakness,  is that I tend to have a bit too many concerns before taking action, which can lead to missing some opportunities. However, it also means that I tend to consider things more thoroughly. I believe I should be more decisive in my actions.
+As for weakness,  is that I tend to have a bit concerns before taking action, which can lead to missing some opportunities. However, it also means that I tend to consider things more thoroughly. I believe I should be more decisive in my actions.
 
 
 
 ### 南京大学
 
-Nanjing University is a super cool university located in Nanjing, China. It's got a really rich history and culture and is one of China's top universities. They're especially great in fields like math, physics, bio, chem, and also stuff like literature, history, and philosophy. The campus is really nice and has everything you need for studying and living. Definitely check it out if you're looking for a place to study!
+Nanjing University is a super cool university located in Nanjing, China. It's got a really rich history and culture and it is one of China's top universities. They're especially great in fields like math, physics, astronomy and computer science. The campus is really nice and has everything you need for studying and living. 
 
 
 
 ### 联想
 
-"I know that Lenovo was founded in China and has a global presence as a well-known large-scale company. Its main businesses include manufacturing intelligent devices, selling PCs, and providing cloud services. I chose Lenovo for two reasons: first, C++ development is a suitable job for me, and second, because I have been using Lenovo devices since childhood. My home's desktop computer, my current y9000p laptop, and my monitor are all Lenovo products. For me, I have a certain personal attachment to Lenovo. I also hope to work in Shenzhen because I have elderly relatives living there, and I can take this opportunity to visit them frequently."
+"I know that Lenovo was founded in China and has a global presence as a well-known large-scale company. Its main businesses include manufacturing intelligent devices, selling PCs, and providing cloud services. I chose Lenovo for two reasons: first, software engineer is a suitable job for me, and second, I have been using Lenovo devices since childhood. Such as the desktop computer in my home, my current legion y nine-thousand p laptop, and my monitor are all Lenovo products, so I can say that I have a certain personal attachment to Lenovo. And I also hope to begin my career in Shanghai, I think that this is the city which gives infinite opportunities to young people.
 
 
 
@@ -84,7 +87,7 @@ Nanjing University is a super cool university located in Nanjing, China. It's go
 
 Bosch Automotive is one of the world's leading automotive technology and component suppliers. The company is headquartered in Germany. Bosch Automotive focuses on providing advanced automotive technology solutions to car manufacturers. including engine control systems, transmission systems, vehicle electronics, safety technology, and driver assistance systems
 
-
+博世汽车是全球领先的汽车技术和零部件供应商之一，总部位于德国。博世汽车专注于为汽车制造商提供先进的汽车技术解决方案，包括发动机控制系统、传动系统、车辆电子、安全技术和驾驶辅助系统。
 
 ### 规划
 

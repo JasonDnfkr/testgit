@@ -1,8 +1,62 @@
 [TOC]
 
+## - HTTP 报文格式
+
+### 请求报文格式
+
+<img src="HTTP.assets/image-20230902174507024.png" alt="image-20230902174507024" style="zoom:67%;" />
+
+```
+GET / HTTP/1.1
+Host: www.baidu.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,/;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: BAIDUID=6729CB682DADC2CF738F533E35162D98:FG=1;
+BIDUPSID=6729CB682DADC2CFE015A8099199557E; PSTM=1614320692; BD_UPN=13314752;
+BDORZ=FFFB88E999055A3F8A630C64834BD6D0;
+__yjs_duid=1_d05d52b14af4a339210722080a668ec21614320694782; BD_HOME=1;
+H_PS_PSSID=33514_33257_33273_31660_33570_26350;
+BA_HECTOR=8h2001alag0lag85nk1g3hcm60q
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age=0
+```
 
 
-## GET 与 POST
+
+### 响应报文格式
+
+<img src="HTTP.assets/image-20230902174955337.png" alt="image-20230902174955337" style="zoom:67%;" />
+
+```
+HTTP/1.1 200 OK
+Bdpagetype: 1
+Bdqid: 0xf3c9743300024ee4
+Cache-Control: private
+Connection: keep-alive
+Content-Encoding: gzip
+Content-Type: text/html;charset=utf-8
+Date: Fri, 26 Feb 2021 08:44:35 GMT
+Expires: Fri, 26 Feb 2021 08:44:35 GMT
+Server: BWS/1.1
+Set-Cookie: BDSVRTM=13; path=/
+Set-Cookie: BD_HOME=1; path=/
+Set-Cookie: H_PS_PSSID=33514_33257_33273_31660_33570_26350; path=/; domain=.baidu.com
+Strict-Transport-Security: max-age=172800
+Traceid: 1614329075128412289017566699583927635684
+X-Ua-Compatible: IE=Edge,chrome=1
+Transfer-Encoding: chunked
+```
+
+
+
+
+
+
+
+## - GET 与 POST
 
 ### GET 和 POST 的区别
 
@@ -26,7 +80,7 @@
 
 
 
-## HTTP 特性
+## - HTTP 特性
 ### HTTP 1.0 
 早期 HTTP/1.0 性能上的一个很大的问题，那就是每发起一个请求，都要新建一次 TCP 连接（三次握手），而且是串行请求，做了无谓的 TCP 连接建立和断开，增加了通信开销。
 https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/16-%E7%9F%AD%E8%BF%9E%E6%8E%A5%E4%B8%8E%E9%95%BF%E8%BF%9E%E6%8E%A5.png
@@ -105,7 +159,7 @@ QUIC 协议通过连接 ID 来标记通信的两个端点，客户端和服务�
 
 
 
-## HTTPS
+## - HTTPS
 ### HTTP 与 HTTPS 区别
  - HTTP 信息是明文传输，存在安全风险的问题。HTTPS 在 TCP 和 HTTP 网络层之间加入了 SSL/TLS 安全协议，使得报文能够加密传输。
  - HTTPS 在 TCP 三次握手之后，还需进行 SSL/TLS 的握手过程，才可进入加密报文传输。
@@ -199,18 +253,18 @@ HTTPS 采用 对称加密 和 非对称加密 的「混合加密」通信。
 
 
 
-### 键入网址到网页显示，发生了什么？
+## - 键入网址到网页显示，发生了什么？
 
 https://www.xiaolincoding.com/network/1_base/what_happen_url.html
 
-①浏览器解析url
-②生成一个http请求协议包，把协议包的发送委托给操作系统
-③操作系统在发送协议包之前先要获取服务器的IP地址。如果在本地的浏览器缓存、操作系统缓存或者hosts文件中存在对应的IP地址，就不需要再访问本地的DNS服务器了。如果不存在，访问本地的DNS服务器，由本地DNS服务器对进行递归访问，即按照层级向下访问，最后得到IP地址。
-④得到ip地址后。进行TCP连接，三次握手。
-⑤握手之后，把请求层层封装，通过网卡将数据发送到交换机。交换机会进行校验以及查找交换表转发，到达路由器。路由器把MAC层扒皮，查看目的ip，然后根据路由表选择下一跳，再进行MAC层封装。重复这个过程，最后到达服务器。
-⑥到达服务器后，会对数据包进行扒皮并且校验。使用FCS校验码校验二进制序列的正确性。在MAC层看目的MAC是不是自己，在网络层看目的ip是不是自己，同时知道上层协议是TCP还是UDP协议。在TCP中知道这是一个什么保文，请求保文、响应报文还是结束连接的报文。通过端口号知道这是交给那么应用进程的。
-⑦应用进程知道你访问的是什么资源，那么就给客户端返回一个Http响应协议包，把资源封装在其中。通过同样的流程把数据返回给客户端。
-⑧浏览器拿到数据后，对数据进行渲染，解码，变成了一个页面显示在浏览器上。
+① 浏览器解析 URL。
+② 生成一个 HTTP 请求协议包，把协议包的发送委托给操作系统。
+③ 操作系统在发送协议包之前先要获取服务器的 IP 地址。如果在本地的浏览器缓存、操作系统缓存或者 hosts 文件中存在对应的IP地址，就不需要再访问本地的 DNS 服务器了。如果不存在，访问本地的 DNS 服务器，由本地 DNS 服务器对进行递归访问，即按照层级向下访问，最后得到 IP 地址。
+④ 得到 IP 地址后。进行 TCP 连接，三次握手。
+⑤ 握手之后，把请求层层封装，通过网卡将数据发送到交换机。交换机会进行校验以及查找交换表转发，到达路由器。路由器把 MAC 层扒皮，查看目的 IP，然后根据路由表选择下一跳，再进行 MAC 层封装。重复这个过程，最后到达服务器。
+⑥ 到达服务器后，会对数据包进行扒皮并且校验。使用 FCS 校验码校验二进制序列的正确性。在 MAC 层看目的 MAC 是不是自己，在网络层看目的 IP 是不是自己，同时知道上层协议是 TCP 还是 UDP 协议。在 TCP 中知道这是一个什么保文，请求保文、响应报文还是结束连接的报文。通过端口号知道这是交给那么应用进程的。
+⑦ 应用进程知道你访问的是什么资源，那么就给客户端返回一个 HTTP 响应协议包，把资源封装在其中。通过同样的流程把数据返回给客户端。
+⑧ 浏览器拿到数据后，对数据进行渲染，解码，变成了一个页面显示在浏览器上。
 
 
 
@@ -234,7 +288,7 @@ https://www.xiaolincoding.com/network/1_base/what_happen_url.html
 
 这一步需要查询服务器域名对应的 IP 地址。
 
-主要经历：本地 DNS 服务器 -> 根域名服务器 -> 二级域名服务器-> 
+主要经历：本地 DNS 服务器 -> 根域名服务器 -> 二级域名服务器->  ...
 
 1. 客户端首先发出 DNS 请求给本地 DNS 服务器，查询 www.baidu.com 的 IP。
 2. 本地域名服务器收到客户端的请求后，如果缓存能找到 www.baidu.com，则它直接返回 IP 地址。如果没有，本地 DNS 会查询根域名服务器 www.baidu.com 的IP。
@@ -292,4 +346,22 @@ https://www.xiaolincoding.com/network/1_base/what_happen_url.html
 - 在 MAC 层看目的 MAC 是不是自己，在网络层看目的 IP 是不是自己，同时知道上层协议是 TCP 还是 UDP 协议；
 - 在 TCP 中知道这是一个什么保文，请求保文、响应报文还是结束连接的报文；通过端口号知道这是交给那么应用进程的；
 - 应用进程知道访问的是什么资源，那么就给客户端返回一个 HTTP 响应协议包，把资源封装在其中。通过同样的流程把数据返回给客户端。
+
+
+
+
+
+## - HTTP 和 TCP 长链接
+
+在 HTTP/1.1 版本中，默认的连接都是长连接，通过请求头 Connection: keep-alive 字段进行指定。**长链接的本质是 TCP 协议中的保活机制。**
+
+保活机制的工作原理：通过在服务器端设置一个保活定时器，当定时器开始工作后就定时的向网络通信的另一端发出保活探测的TCP报文，如果接收到了ACK报文，那么就证明对方存活，可以继续保有连接；否则就证明网络存在故障。
+
+具体来说应该是 Linux 在内核层面支持的一个功能，相关参数如下：
+
+`tcp_keepalive_time`，单位：秒，表示发送的探测报文之前的连接空闲时间，默认是 7200s。
+
+`tcp_keepalive_intvl`，单位：秒，表示两次探测报文之间的间隔时间，默认是 75s
+
+`tcp_keepalive_probes`，单位，秒，表示探测的次数，默认是 9
 
