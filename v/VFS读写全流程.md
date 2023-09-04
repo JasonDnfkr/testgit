@@ -198,41 +198,34 @@ struct inode_operations
 
   
 
-- `new_sync_read`：将参数 `char* buf`，`size len` 封装成两个控制读写的结构体(vec)，命名为 `struct kiocb` 和 `struct iov_iter `。
+- `new_sync_read`：将参数 `char* buf`、`size len` 、文件 `struct file` 等，封装成两个控制读写的封装数据结构，命名为 `struct kiocb` 和 `struct iovec ` 。
 
-  - `struct kiocb` 封装了 `struct file *`，用于控制内核的读写流程（当前I/O的状态）。内核的每一次读写都会对应一个 `kiocb`。
-
-  - `struct iov_iter` 是一个迭代器结构，封装了 buf 和 len。**这个迭代器用于记录所有需要读取的片段信息，因为内核有系统调用 （readv、writev） 支持读写多个非连续缓冲区。**
-
-  - 这两个封装的结构，简单来说，用于内核态到用户态的数据拷贝。
-
-  - ```c
-    struct iov_iter {
-        size_t count;	// 需要读写的总长度
-        union {
-            const struct iovec *iov; // 指向一个数组，代表所有片段信息
-            const struct kvec *kvec;
-            const struct bio_vec *bvec;
-            struct pipe_inode_info *pipe;
-        };
-        unsigned long nr_segs; // iov的数组长度
-        };
-    };
-    ```
+  - `struct kiocb` 封装了 `struct file *` （文件的 file 结构）、`ki_pos` （文件读取的偏移） ，用于封装文件 IO 相关操作的状态和进度信息。内核的每一次读写都会对应一个 `kiocb`。
+- `struct iovec` 是一个迭代器结构，封装了 buf 和 len。**这个迭代器用于记录所有需要读取的片段信息。** 这个封装的目的，是为了对应 readv、writev 等系统调用。
 
  
 
-- `file->f_op->read_iter(kio, iter);` -> `generic_file_read_iter`：封装完成之后，会调用一个通用的读文件接口，**在此处判断是直接读写 Direct IO 还是缓存读写 Buffer IO**。该函数有两个执行路径，如果是以O_DIRECT方式打开文件，则读操作跳过page cache，直接发动块设备IO请求，读取磁盘；否则尝试从page cache中获取所需的数据
+- `file->f_op->read_iter(kio, iter);` -> `generic_file_read_iter`：封装完成之后，会调用一个通用的读文件接口，**在此处判断是直接读写 Direct IO 还是缓存读写 Buffer IO**。该函数有两个执行路径，如果是以 O_DIRECT 方式打开文件，则读操作跳过page cache，直接发动块设备IO请求，读取磁盘；否则尝试从page cache中获取所需的数据
 
  
 
 - 讨论 Buffer IO 的情况：这里开始涉及到了 page cache 层，调用 `filemap_read`，该函数逻辑是，如果所需数据存在于 page cache 中，并且数据不是脏的，则从 page cache 中直接获取数据返回；如果数据在 page cache 中不存在，或者数据是脏的，则 page cache 会引发读磁盘的操作。并且会有一定的预读机制来提高 cache 的命中率，减少磁盘访问的次数。读磁盘具体来说，是：
 
   - 先尝试找到对应的 page，如果不存在，则创建，将文件内容读取到 page 中， 然后再拷贝到对应的 `iov` 结构里（封装了 buf 和 len 的结构体）。**这一段的机制十分复杂，涉及到预读等流程**。
-
   - 预读的流程，还不太了解 // TODO
+  - 
 
-    
+- Buffer IO 相关的读取操作封装在一个叫 `filemap_read` 的函数里，核心逻辑有这么几步：--- 由于文件在磁盘中是以块为单位组织管理的，每块大小为 4k，内存是按照页为单位组织管理的，每页大小也是 4k。文件中的块数据被缓存在 page cache 中的缓存页中。所以
+
+- 首先通过 find_get_page 方法查找我们要读取的文件数据是否已经缓存在了 page cache 中。
+
+- 如果 page cache 中不存在文件数据的缓存页，就需要通过 page_cache_sync_readahead 方法从磁盘中读取数据并缓存到 page cache 中。于此同时还需要**同步**预读若干相邻的数据块到 page cache 中。这样在下一次顺序读取的时候，直接就可以从 page cache 中读取了。
+
+- 如果此次读取的文件数据已经存在于 page cache 中了，就需要调用 PageReadahead 来判断是否需要进一步预读数据到缓存页中。如果是，则从磁盘中**异步**预读若干页到 page cache 中。具体预读多少页是根据内核相关预读算法来动态调整的。
+
+- 经过上面几个流程，此时文件数据已经存在于 page cache 中的缓存页中了，最后内核调用 copy_page_to_iter 方法将 page cache 中的数据拷贝到用户空间缓冲区 DirectByteBuffer 中。
+
+  
 
 ### 2.3 内核如何从磁盘上读取数据
 
