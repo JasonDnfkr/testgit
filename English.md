@@ -13,7 +13,7 @@ In terms of internships, I interned at vivo Smartphone during the summer, workin
 > This experience deepened my understanding of kernel fundamentals and enhanced my ability to read large-scale project source code and swiftly locate bugs.
 >
 
-In terms of project experience,  I implemented a thrity-two-bit Linux-like operating system kernel prototype, based on intel x-eighty-six CPU.  I mainly referenced the design of the Linux operating system. It has some fundamental kernel functionalities, such as hard disk loading, interrupt and exception handling, virtual memory management, process scheduling and concurrency, privilege level isolation, and some system calls like sleep, fork, exec and printf.
+As for my project experience,  I implemented a thrity-two-bit Linux-like operating system kernel prototype, based on intel x-eighty-six CPU.  I mainly referenced the design of the Linux operating system. It has some fundamental kernel functionalities, such as hard disk loading, interrupt and exception handling, virtual memory management, process scheduling and concurrency, privilege level isolation, and some system calls like sleep, fork, exec and printf.
 
 In addition, during my undergraduate studies, I served as the class monitor and the president of the School of Computer Association. These experiences greatly improved my communication skills and taught me the value of effective teamwork.
 
@@ -25,7 +25,7 @@ That's my basic information. Thank you for considering my application, and I'm e
 
 介绍一门专业课/学的最好的课程/最喜欢的课程
 
-My favorite course is Operating Systems, as you can see from my projects, which are related to it. Operating Systems allow me to gain a comprehensive understanding of the fundamental aspects of computers. I could study in detail about the process of program execution, explore the principles behind programming languages and CPU.
+My favorite course is Operating System, as you can see from my projects, which are related to it. Operating System allows me to gain a comprehensive understanding of the fundamental aspects of computers. I could study in detail about the process of program execution, explore the principles behind programming languages and CPU.
 
 
 
@@ -73,7 +73,7 @@ As for weakness,  is that I tend to have a bit concerns before taking action, wh
 
 ### 南京大学
 
-Nanjing University is a super cool university located in Nanjing, China. It's got a really rich history and culture and it is one of China's top universities. They're especially great in fields like math, physics, astronomy and computer science. The campus is really nice and has everything you need for studying and living. 
+Nanjing University is a super cool university located in Nanjing, China. It's got a really rich history and culture and it is one of China's top universities. It's especially great in fields like math, physics, astronomy and computer science. The campus is really nice and has everything you need for studying and living. 
 
 
 

@@ -215,15 +215,17 @@ struct inode_operations
   - 预读的流程，还不太了解 // TODO
   - 
 
-- Buffer IO 相关的读取操作封装在一个叫 `filemap_read` 的函数里，核心逻辑有这么几步：--- 由于文件在磁盘中是以块为单位组织管理的，每块大小为 4k，内存是按照页为单位组织管理的，每页大小也是 4k。文件中的块数据被缓存在 page cache 中的缓存页中。所以
+- Buffer IO 相关的读取操作封装在一个叫 `filemap_read` 的函数里。核心逻辑有这么几步：
 
-- 首先通过 find_get_page 方法查找我们要读取的文件数据是否已经缓存在了 page cache 中。
+- 由于文件在磁盘中是以块为单位组织管理的，每块大小为 4k，内存是按照页为单位组织管理的，每页大小也是 4k。文件中的块数据被缓存在 page cache 中的缓存页中。所以
 
-- 如果 page cache 中不存在文件数据的缓存页，就需要通过 page_cache_sync_readahead 方法从磁盘中读取数据并缓存到 page cache 中。于此同时还需要**同步**预读若干相邻的数据块到 page cache 中。这样在下一次顺序读取的时候，直接就可以从 page cache 中读取了。
+- 首先通过 `find_get_page` 方法查找要读取的文件数据是否已经缓存在了 page cache 中。
+
+- 如果 page cache 中不存在文件数据的缓存页，就需要通过 `page_cache_sync_readahead` 方法从磁盘中读取数据并缓存到 page cache 中。于此同时还需要**同步**预读若干相邻的数据块到 page cache 中。这样在下一次顺序读取的时候，直接就可以从 page cache 中读取了。
 
 - 如果此次读取的文件数据已经存在于 page cache 中了，就需要调用 PageReadahead 来判断是否需要进一步预读数据到缓存页中。如果是，则从磁盘中**异步**预读若干页到 page cache 中。具体预读多少页是根据内核相关预读算法来动态调整的。
 
-- 经过上面几个流程，此时文件数据已经存在于 page cache 中的缓存页中了，最后内核调用 copy_page_to_iter 方法将 page cache 中的数据拷贝到用户空间缓冲区 DirectByteBuffer 中。
+- 经过上面几个流程，此时文件数据已经存在于 page cache 中的缓存页中了，最后内核调用 `copy_page_to_iter` 方法将 page cache 中的数据拷贝到用户空间缓冲区中。
 
   
 
