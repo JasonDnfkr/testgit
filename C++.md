@@ -179,21 +179,22 @@ vector，string等分配时，自己本身通常是个栈对象，但里面的al
 
 new的功能屏蔽掉即可，即屏蔽掉operator new和定位new表达式。注意：屏蔽了operator new，实际也是将定位new屏蔽掉。
 
-### 2. new & malloc
+### 2. new & malloc 的区别
 
-- malloc是库函数，new是C++的运算符
-- malloc 需要强制类型转换，它不做类型检查。new会做类型检查
-- malloc 不会清空内存区域
-- **malloc函数 不会 调用类/结构体的构造函数。 new运算符 会 调用类/结构体的构造函数**。 malloc失败时，会返回NULL指针。 new失败时，会抛出std::bad_alloc异常
+- malloc是库函数，new 是 C++ 的运算符。
+- malloc 返回 void*，需要强制类型转换，它不做类型检查。new 会做类型检查。
+- malloc 失败时，会返回 NULL 指针。 new 失败时，会抛出 std::bad_alloc 异常。
+- malloc 函数 不会 调用类/结构体的构造函数。 new运算符 会 调用类/结构体的构造函数。
+- new 和 delete 实际上是对 malloc 和 free 的一层封装。
 
 
 
-- **new的原理**
-  - 调用operator new函数申请空间
-  - 在申请的空间上执行构造函数，完成对象的构造
-- **delete的原理**
-  - 在空间上执行析构函数，完成对象中资源的清理工作
-  - 调用operator delete函数释放对象的空间
+- **new 的原理**
+  - 调用 operator new 的重载函数，其内部使用 malloc 申请空；
+  - 在申请的空间上执行构造函数，完成对象的构造。
+- **delete 的原理**
+  - 在空间上执行析构函数，内部调用完成对象中资源的清理工作
+  - 调用 operator delete 的重载函数，释放对象的空间
 
 
 
@@ -209,7 +210,7 @@ new的功能屏蔽掉即可，即屏蔽掉operator new和定位new表达式。�
 
   new []会在首地址前4个字节定义数组长度。因为需要逐个调用构造函数。
 
-  当delete[]时，会根据前4个字节所定义的长度来执行析构函数删除整个数组。
+  当delete[]时，会根据前4个字节所定义的长度来执行析构函数删除整个数组。 如果对于自定义类型，使用 delete 去删除数组类型的内存空间，会导致 delete 直接从前4个字节的长度开始删除，直接引发报错。
 
 
 
