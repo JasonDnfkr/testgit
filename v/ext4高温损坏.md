@@ -111,7 +111,7 @@
 - 在 inode table 中完善该 inode 号所在行的记录；
 - 在目录的 data block 中添加一条该文件的相关记录；
 - 将数据填充到 data block 中。
-  - 注意，填充到 data block 中的时候会调用 block 分配器：一次分配 4KB 大小的 block 数量，当填充完 4KB 的 data block 后会继续调用 block 分配器分配 4KB 的 block，然后循环直到填充完所有数据。也就是说，如果存储一个 100M 的文件需要调用 block 分配器 100*1024/4=25600 次。
+  - 注意，在 ext4 版本文件系统前，填充到 data block 中的时候会调用 block 分配器：一次分配 4KB 大小的 block 数量，当填充完 4KB 的 data block 后会继续调用 block 分配器分配 4KB 的 block，然后循环直到填充完所有数据。也就是说，如果存储一个 100M 的文件需要调用 block 分配器 100*1024/4=25600 次。
   - 另一方面，在 block 分配器分配 block 时，block 分配器并不知道真正有多少 block 要分配，只是每次需要分配时就分配，在每存储一个 data block 前，就去 bmap 中标记一次该 block 已使用，它无法实现一次标记多个 bmap 位。这一点在 ext4 中进行了优化。
 - 填充完之后，去 inode table 中更新该文件 inode 记录中指向 data block 的寻址指针。
 
