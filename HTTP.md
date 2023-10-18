@@ -54,6 +54,48 @@ Transfer-Encoding: chunked
 
 
 
+## - Cookie、Session、Token
+
+cookie：浏览器访问服务器，服务器返回cookie给浏览器，浏览器在本地存储cookie，下次带着cookie访问服务器，服务器返回相应的数据。
+
+session：浏览器访问服务器，服务器会存储浏览器的数据value，并把key返回给浏览器，浏览器下次带着key（session ID）来访问服务器，服务器能根据key来获取数据。如果有负载均衡，则是session的一个痛点 。
+
+token：浏览器访问服务器，服务器保留一份密钥并返回一个加密之后的token给浏览器，浏览器拿着token访问服务器，服务器根据密钥验证token，然后返回数据。
+
+三者区别
+
+session和cookie的区别：
+
+1、数据存放位置不同：session数据是存放在服务器中的，cookie是存放在浏览器中的。
+
+2、用户安全程度不同：cookie数据存放在浏览器本地不是很安全，session存放在服务器中相对安全。
+
+3、性能使用程度不同：session数据放在服务器上，访问增多会占用服务器的性能，如果考虑到减轻服务器性能方面，应该使用cookie。
+
+4、数据存储大小不同：单个cookie保存的数据不能超过4k，session存储在服务器，根据服务器大小来定。
+
+token和session的区别：
+
+1、token是开发定义的，session是http协议规定的
+
+2、token不一定存储在服务器中，session存储在服务器中
+
+3、token可以跨域，session不可用跨域，它是与域名绑定的
+
+如何解决cookie安全性问题
+
+1、cookie有效期不要设置太长。
+
+2、设置HttpOnly属性为true，可以防止js脚本读取cookie信息，防止XSS攻击。
+
+3、设置复杂的cookie，加密cookie。cookie的key使用uuid随机生成，value可以使用复杂组合，比如：用户名+当前时间+cookie有效期+随机数。这样可以尽可能使加密后的cookie更难解密，从而保护了cookie中的信息。
+
+4、用户第一次登录时，服务器保存IP+cookie加密后的token。后面每次请求，都去将当前cookie和IP组合起来加密后的token与保存的token作对比，只有完全对应才能验证成功。
+
+5、如果网站支持https，尽可能使用https。如果网站支持https，那么可以为cookie设置Secure属性为true，表示cookie只能使用https协议发送给服务器。
+
+理解jwt
+JWT由3部分组成：标头(Header)、有效载荷(Payload)和签名(Signature)。在传输的时候，会将JWT的3部分分别进行Base64编码后用.进行连接形成最终传输的字符串。
 
 
 ## - GET 与 POST
