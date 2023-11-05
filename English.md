@@ -76,7 +76,14 @@ As for weakness,  is that I tend to have a bit concerns before taking action, wh
 
 Nanjing University is a super cool university located in Nanjing, China. It's got a really rich history and culture and it is one of China's top universities. It's especially great in fields like math, physics, astronomy and computer science. The campus is really nice and has everything you need for studying and living. 
 
+### 微策略
+MicroStrategy is the world's largest independently listed analytics and business intelligence company, founded in 1989.
 
+It currently has 4,000+ customers and 2,000+ employees in 27 countries around the world.
+
+MicroStrategy is headquartered in Tysons Corner VA with 5 development centers worldwide.
+
+In 2023, MicroStrategy's innovative product is MicroStrategy ONE. This is an AI-driven, cloud-native, vendor-agnostic analytics platform that enables businesses to leverage generative AI for deeper insights.
 
 ### 联想
 
