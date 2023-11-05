@@ -4,14 +4,13 @@
 
 ### Self-intro
 
-Hello everyone, I'm glad I have the opportunity provided by **Lenovo**. My name is Zehao Zhang, and I am currently a master student majoring in software engineering at Nanjing University. I am interested in applying for the position of Cpp Software Engineer. Next, I will give a brief introduction about myself.
+Hello everyone, I'm glad I have the opportunity provided by **MicroStrategy**. My name is Zehao Zhang, and I am currently a master student majoring in software engineering at Nanjing University. I am interested in applying for the position of Backend Software Engineer. Next, I will give a brief introduction about myself.
 
 In my academic performance, I have achieved excellent grades during my academic career. During my undergraduate studies, I ranked first in my major at the school. In terms of awards, I received the National Scholarship in 2020 (two thousand twenty). 
 
-In terms of internships, I interned at vivo Smartphone during the summer, working as a Storage System Engineer. I was responsible for the development and maintenance of storage modules within the Linux kernel. I primarily resolved issues related to file system, and data inconsistency. I also give some contributions to the Linux open-source community.
+Currently, I have been interned in Huawei Cloud Computing Company from August to now as a backend engineer, participated in the development of online experiment sandbox, implemented some interfaces and business logic.
 
-> This experience deepened my understanding of kernel fundamentals and enhanced my ability to read large-scale project source code and swiftly locate bugs.
->
+I interned at vivo Smartphone from May to August, working as a Storage System Engineer. I was responsible for the development and maintenance of storage modules within the Linux kernel. I primarily resolved issues related to file system, and data inconsistency. I also give some contributions to the Linux open-source community.
 
 As for my project experience,  I implemented a thrity-two-bit Linux-like operating system kernel prototype, based on intel x-eighty-six CPU.  I mainly referenced the design of the Linux operating system. It has some fundamental kernel functionalities, such as hard disk loading, interrupt and exception handling, virtual memory management, process scheduling and concurrency, privilege level isolation, and some system calls like sleep, fork, exec and printf.
 
