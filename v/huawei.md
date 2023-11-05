@@ -7,6 +7,7 @@
 ### 在做哪些需求？
 #### 1. 沙箱多租接口改造
 
+这个项目最初是为某些公司或机构定制的。现在，我们准备将其核心能力提取出来，作为一个可重复使用的解决方案。
 This project was originally customized for certain companies or organizations. Now, we are preparing to extract its core capabilities as a reusable solution.
 
 目前在做的需求是：沙箱多租的接口改造任务，主要涉及到两点：
