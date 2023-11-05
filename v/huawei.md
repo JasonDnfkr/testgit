@@ -6,6 +6,9 @@
 
 ### 在做哪些需求？
 #### 1. 沙箱多租接口改造
+
+This project was originally customized for certain companies or organizations. Now, we are preparing to extract its core capabilities as a reusable solution.
+
 目前在做的需求是：沙箱多租的接口改造任务，主要涉及到两点：
 1. 对微服务的业务功能进行进一步划分：改造接口，将业务划分为编排层和原子层。目前存在的问题是，一，原子层的功能有一些混杂，粒度不够小（比如原子层内目前存在一些问题，比如有一些接口属于 update，应该切割为 select 和 update）；二，是把编排层的逻辑
 2. 给目前存在的接口，加上租户鉴权的一个业务逻辑。将记录的数据加上租户的字符串标识，存入新的数据库表里。也就是给当前用户查询出来的记录，加上tenant，userId的唯一标识。比如，有个场景是：每一个实验都有一个表记录相关数据，现在需要做的一个工作是，根据userId查询相应的实验记录，加上租户字符串标识，存入新的带租户字段的表中，做到一个数据转移更新的功能。
