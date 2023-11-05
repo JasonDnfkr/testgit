@@ -9,7 +9,9 @@
 
 这个项目最初是为某些公司或机构定制的。现在，我们准备将其核心能力提取出来，作为一个可重复使用的解决方案。
 
-This project was originally customized for certain companies or organizations. Now, we are preparing to extract its core capabilities as a reusable solution.
+> This project was originally customized for certain companies or organizations. Now, we are preparing to extract its core capabilities as a reusable solution.
+>
+> 
 
 目前在做的需求是：沙箱多租的接口改造任务，主要涉及到两点：
 1. 对微服务的业务功能进行进一步划分：改造接口，将业务划分为编排层和原子层。目前存在的问题是，一，原子层的功能有一些混杂，粒度不够小（比如原子层内目前存在一些问题，比如有一些接口属于 update，应该切割为 select 和 update）；二，是把编排层的逻辑
