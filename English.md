@@ -44,6 +44,8 @@ The city is in the south, and I prefer studying and living in the south.
 
 It is a great choice for me to continue my career in Shanghai city if it is possible.
 
+Hangzhou is this cool city in eastern China, it's the capital of Zhejiang province, it is famous for its West Lake, which has been inspiring poets and artists for ages; It has beautiful natural scenery, ancient temples, and a whole tea culture going on. What's more, it's a hub for tech companies, so it gives infinite opportunities to young people like me. Definitely a must-visit spot for travelers and business folks! It is a great choice for me to continue my career in Shanghai city if it is possible.
+
 
 
 ### 爱好
