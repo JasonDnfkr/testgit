@@ -2,13 +2,28 @@
 
 1. **问题描述：** 测试同事反馈了问题，发现采用新 Linux 内核的手机无法识别 exFAT 格式的 U 盘，访问文件时只能读取到文件名，读取不到其他的元数据。
 
+   > Colleague testing feedback revealed an issue where smartphones using the new Linux kernel are unable to recognize exFAT-formatted USB drives. When accessing files, only the file names can be read, and other metadata cannot be accessed.
+
 2. **问题定位：** 初步排查，发现，在挂载时，新版本的 exFAT 文件系统，不支持 `namecase` 参数，也就是说，新版本内核不支持文件名大小写敏感。
+
+   > Upon initial investigation, it was discovered that with the new version of the exFAT file system, the `namecase` parameter is not supported during mounting. In other words, the new kernel version does not support case sensitivity for file names.
 
 3. **证实推测：** 使用老版本内核的 `fsck.exfat` 工具，设定 `namecase` 参数为 0，对损坏的 U 盘进行修复。修复后，新版内核下 U 盘可以被正确识别。对比修复前后的二进制数据，发现校验和和文件名哈希这两个字段，发生了变化。
 
+   > Using the `fsck.exfat` tool with an older kernel version, by setting the `namecase` parameter to 0, the damaged USB drive was repaired. After the repair, the USB drive can be correctly recognized by the new kernel version. A comparison of the binary data before and after the repair revealed changes in the checksum and file name hash fields.
+
 4. **问题排查：** 然后是调试内核代码，去定位出现问题的代码段。首先，让问题复现，并运行 `ls -l` 命令，发现只能看到文件名而看不到其他文件记录数据，尝试访问某个文件时出现 "找不到文件" 错误。然后使用 strace, ftrace 等一系列工具，最终定位到是一个遍历目录项的系统调用，返回了异常错误码。这个系统调用，调用了 exFAT 的遍历目录的接口函数，它的作用是，解析文件名路径，计算校验和和哈希值，并和磁盘上的值进行比对。新版内核和老版内核在生成文件名哈希时，由于 `namecase` 参数的设计，采用了不同的计算方式，导致了文件无法识别。
 
+   > Next, the debugging process involved locating the problematic code segment within the kernel. Initially, the issue was reproduced, and the `ls -l` command was executed, revealing that only file names were visible, while other file record data could not be accessed. Attempting to access a specific file resulted in a "File not found" error.
+   >
+   > Subsequently, a series of tools, such as strace and ftrace, were used, leading to the identification of a system call responsible for directory entry traversal, which returned an abnormal error code. This system call invoked exFAT's directory traversal interface function, which parsed the file name path, calculated checksums and hashes, and compared them to the values on the disk. The discrepancy in file name hash generation between the new and old kernel versions, due to the design of the `namecase` parameter, was identified as the root cause of the problem.
+
 5. **问题解决：** 为解决问题，提出了两种解决方案：一是修改内核代码以跳过对 name hash 的判断，二是修改 fsck 修复工具的代码，让它能够按照老版本的方式，计算校验和、哈希值。
+
+   > To address the issue, two solutions were proposed:
+   >
+   > 1. Modify the kernel code to bypass the check for name hash.
+   > 2. Modify the fsck repair tool's code to calculate checksums and hash values in the manner of the older version.
 
 
 

@@ -8,7 +8,7 @@ Hello everyone, I'm glad I have the opportunity provided by **MicroStrategy**. M
 
 In my academic performance, I have achieved excellent grades during my academic career. During my undergraduate studies, I ranked first in my major at the school. In terms of awards, I received the National Scholarship in 2020 (two thousand twenty). 
 
-Currently, I have been interned in Huawei Cloud Computing Company from August to now as a backend engineer, participated in the development of online experiment sandbox, implemented some interfaces and business logic.
+Currently, I have been interned in Huawei Cloud Computing Company from August to now as a backend engineer, participated in the development of Huawei Cloud's education sector, CLOUD COLLEGE. I am currently working on the online experiment sandbox, implemented some interfaces and business logic.
 
 I interned at vivo Smartphone from May to August, working as a Storage System Engineer. I was responsible for the development and maintenance of storage modules within the Linux kernel. I primarily resolved issues related to file system, and data inconsistency. I also give some contributions to the Linux open-source community.
 
@@ -44,7 +44,7 @@ The city is in the south, and I prefer studying and living in the south.
 
 It is a great choice for me to continue my career in Shanghai city if it is possible.
 
-Hangzhou is this cool city in eastern China, it's the capital of Zhejiang province, it is famous for its West Lake, which has been inspiring poets and artists for ages; It has beautiful natural scenery, ancient temples, and a whole tea culture going on. What's more, it's a hub for tech companies, so it gives infinite opportunities to young people like me. Definitely a must-visit spot for travelers and business folks! It is a great choice for me to continue my career in Shanghai city if it is possible.
+Hangzhou is a cool city in eastern China, it's the capital of Zhejiang province, it is famous for its West Lake, which has been inspiring poets and artists for ages; It has beautiful natural scenery, ancient temples, and a whole tea culture going on. What's more, it's a hub for tech companies, so it gives infinite opportunities to young people like me. Definitely a must-visit spot for travelers and business folks! It is a great choice for me to continue my career in Shanghai city if it is possible.
 
 
 
@@ -105,6 +105,15 @@ First of all, I hope to further my learning and make achievements in my current 
 
 
 
-困难
+#### 困难
 
 I'm sure that the current situation is quite challenging. Over the past two years, the job market hasn't been favorable, and during this period, I have to juggle internship tasks, campus recruitment, and my graduation thesis. I'm dealing with multiple tasks simultaneously, which puts a significant test on my capabilities.
+
+
+
+#### vivo 工作
+
+During my internship at Vivo, my work primarily involved two main tasks:
+
+1. I spent amount of time studying the Linux kernel source code, focusing on file system-related components. This allowed me to gain a good understanding of the Linux kernel's file systems. Building upon this knowledge, I successfully resolved data integrity issues in some real projects.
+2. The company has robots that scan the latest Linux kernel code to detect non-compliant code. We were responsible for fixing this code and submitting the fixes to the open-source community.
